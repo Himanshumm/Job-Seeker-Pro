@@ -58,9 +58,16 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 
 
 export const getUser = catchAsyncErrors((req, res, next) => {
-  const user = req.user;
+  console.log("Fetching user data...");
+
+  if (!req.user) {
+    console.log("User data is missing.");
+    return next(new ErrorHandler("User Not Found", 404));
+  }
+
+  console.log("User data retrieved:", req.user);
   res.status(200).json({
     success: true,
-    user,
+    user: req.user,
   });
 });
