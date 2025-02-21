@@ -95,7 +95,7 @@ const companies = [
     {
       id: 2,
       title: "Tesla",
-      location: "Street 10 Karachi, Pakistan",
+      location: "Street 10 Karachi, India",
       openPositions: 5,
       icon: <SiTesla />,
     },
