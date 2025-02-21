@@ -45,7 +45,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`http://localhost:4000/api/v1/application/delete/${id}`, {
+        .delete(`${import.meta.env.VITE_PRODUCTION_URL}/api/v1/application/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
