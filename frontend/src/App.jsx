@@ -21,19 +21,39 @@ const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
+      console.log("Fetching user...");
+  
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `${import.meta.env.VITE_PRODUCTION_URL}/api/v1/user/getuser`,
           {
-            withCredentials: true,
+            method: "GET",
+            credentials: "include", // Ensures cookies are sent
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
-        setUser(response.data.user);
+  
+        console.log("Response status:", response.status);
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.log("Error fetching user:", errorData);
+          throw new Error(errorData.message || "Failed to fetch user");
+        }
+  
+        const data = await response.json();
+        console.log("User data:", data.user);
+  
+        setUser(data.user);
         setIsAuthorized(true);
       } catch (error) {
+        console.log("Fetch error:", error.message);
         setIsAuthorized(false);
       }
     };
+  
     fetchUser();
   }, [isAuthorized]);
 
