@@ -14,11 +14,12 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
-    method: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true,
+    origin: "*", // Allows all origins
+    methods: ["GET", "POST", "DELETE", "PUT"],
+    credentials: true, // ⚠️ `credentials: true` cannot be used with `origin: "*"`
   })
 );
+
 
 app.use(cookieParser());
 app.use(express.json());
