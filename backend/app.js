@@ -12,13 +12,11 @@ import fileUpload from "express-fileupload";
 const app = express();
 config({ path: "./config/config.env" });
 
-app.use(
-  cors({
-    origin: "*", // Allows all origins
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    credentials: true, // ⚠️ `credentials: true` cannot be used with `origin: "*"`
-  })
-);
+
+
+app.use(cors());
+
+
 
 
 app.use(cookieParser());
